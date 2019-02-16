@@ -91,10 +91,17 @@ LRESULT OnNotify(HWND hwnd, int idFrom, LPNMHDR pnmhdr)
     NMLVDISPINFO *pDispInfo = (NMLVDISPINFO *)pnmhdr;
     NMLISTVIEW *pListView = (NMLISTVIEW *)pnmhdr;
 
+    TCHAR szFile[] = TEXT("C:\\TEST.TXT");
+    if (GetFileAttributes(szFile) == 0xFFFFFFFF)
+    {
+        OutputDebugString(TEXT("File C:\\TEST.TXT doesn't exists!"));
+        return 0;
+    }
+
     switch (pnmhdr->code)
     {
     case LVN_BEGINDRAG:
-        if (IDataObject *pDataObject = GetFileDataObject(L"C:\\TEST.TXT", IID_IDataObject))
+        if (IDataObject *pDataObject = GetFileDataObject(szFile, IID_IDataObject))
         {
             if (IDropSource *pSource = CDropSource::CreateInstance())
             {

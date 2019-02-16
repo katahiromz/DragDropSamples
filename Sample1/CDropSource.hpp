@@ -31,6 +31,6 @@ protected:
     LONG m_nRefCount;
 };
 
-IDataObject *GetFileDataObject(LPCWSTR pszFile, REFIID riid);
+IDataObject *GetFileDataObject(const TCHAR *pszFile, REFIID riid);
 
 #endif  // ndef CDROPSOURCE_HPP_

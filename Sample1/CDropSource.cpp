@@ -75,7 +75,7 @@ CDropSource::GiveFeedback(DWORD dwEffect)
     return DRAGDROP_S_USEDEFAULTCURSORS;
 }
 
-IDataObject *GetFileDataObject(LPCWSTR pszFile, REFIID riid)
+IDataObject *GetFileDataObject(const TCHAR *pszFile, REFIID riid)
 {
     IDataObject *pDataObject = NULL;
     IShellFolder *pShellFolder;
@@ -83,22 +83,26 @@ IDataObject *GetFileDataObject(LPCWSTR pszFile, REFIID riid)
     PIDLIST_ABSOLUTE pidl;
     HRESULT hr;
 
-    pidl = ILCreateFromPathW(pszFile);
+    pidl = ILCreateFromPath(pszFile);
     if (!pidl)
         return NULL;
 
-    hr = SHBindToParent(pidl, IID_IShellFolder, (void**)&pShellFolder, (PCUITEMID_CHILD*)&pidlRelative);
+    hr = SHBindToParent(pidl, IID_IShellFolder, (void**)&pShellFolder, (PCUITEMID_CHILD *)&pidlRelative);
     if (FAILED(hr))
+    {
+        ::CoTaskMemFree(pidl);
         return NULL;
+    }
 
-    const ITEMIDLIST *pArray[1] = { pidlRelative };
-    hr = pShellFolder->GetUIObjectOf(NULL, 1, pArray, riid, NULL, (void**)&pDataObject);
-    if (FAILED(hr))
-        return NULL;
+    const ITEMIDLIST *array[1] = { pidlRelative };
+    hr = pShellFolder->GetUIObjectOf(NULL, ARRAYSIZE(array), array, riid, NULL, (void**)&pDataObject);
 
     pShellFolder->Release();
     ILFree(pidlRelative);
-    CoTaskMemFree(pidl);
+    ::CoTaskMemFree(pidl);
+
+    if (FAILED(hr))
+        pDataObject = NULL;
 
     return pDataObject;
 }
