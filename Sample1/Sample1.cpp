@@ -33,23 +33,23 @@ BOOL OnCreate(HWND hwnd, LPCREATESTRUCT lpCreateStruct)
     ZeroMemory(&column, sizeof(column));
     column.mask = LVCF_TEXT | LVCF_WIDTH | LVCF_SUBITEM;
     column.pszText = szName;
-    column.cx = 100;
+    column.cx = 150;
     column.iSubItem = 0;
     ListView_InsertColumn(g_hListView, 0, &column);
     column.mask = LVCF_TEXT | LVCF_WIDTH | LVCF_SUBITEM;
     column.pszText = szFileSize;
-    column.cx = 100;
+    column.cx = 150;
     column.iSubItem = 1;
     ListView_InsertColumn(g_hListView, 1, &column);
     column.mask = LVCF_TEXT | LVCF_WIDTH | LVCF_SUBITEM;
     column.pszText = szCRC;
-    column.cx = 100;
+    column.cx = 150;
     column.iSubItem = 2;
     ListView_InsertColumn(g_hListView, 2, &column);
 
     g_himl = ImageList_Create(16, 16, ILC_COLOR | ILC_MASK, 10, 10);
 
-    TCHAR szText[64] = TEXT("TEST.TXT");
+    TCHAR szText[64] = TEXT("C:\\TEST.TXT");
 
     SHFILEINFO shfi;
     ZeroMemory(&shfi, sizeof(shfi));
