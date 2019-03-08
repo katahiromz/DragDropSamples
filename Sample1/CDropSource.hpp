@@ -9,7 +9,7 @@
 #include <windows.h>
 #include <shobjidl.h>
 #include <shlobj.h>
-#include <oleidl.h>
+#include <oleidl.h>     // for IDropSource, IDataObject
 
 class CDropSource : public IDropSource
 {

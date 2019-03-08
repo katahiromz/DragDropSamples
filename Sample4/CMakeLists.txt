@@ -7,7 +7,7 @@
 cmake_minimum_required(VERSION 2.4)
 
 # project name and language
-project(MyProject CXX)
+project(Sample4 C)
 
 # check build type
 if (NOT CMAKE_BUILD_TYPE)
@@ -59,6 +59,13 @@ endif()
 
 ##############################################################################
 
-subdirs(Sample1 Sample2 Sample3 Sample4)
+# executable
+add_executable(Sample4 WIN32
+    Sample4.c
+    CDropTarget.c
+    Sample4_res.rc)
+
+# link
+target_link_libraries(Sample4 comctl32)
 
 ##############################################################################
