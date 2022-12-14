@@ -4,10 +4,10 @@
 ##############################################################################
 
 # CMake minimum version
-cmake_minimum_required(VERSION 2.4)
+cmake_minimum_required(VERSION 3.0)
 
-# project name and language
-project(MyProject CXX)
+# project name and languages
+project(DragDropSamples CXX)
 
 # check build type
 if (NOT CMAKE_BUILD_TYPE)

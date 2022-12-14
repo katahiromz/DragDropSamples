@@ -4,9 +4,9 @@
 ##############################################################################
 
 # CMake minimum version
-cmake_minimum_required(VERSION 2.4)
+cmake_minimum_required(VERSION 3.0)
 
-# project name and language
+# project name and languages
 project(Sample4 C)
 
 # check build type
